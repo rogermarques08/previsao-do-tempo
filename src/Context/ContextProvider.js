@@ -4,18 +4,18 @@ import Context from './Context';
 
 function ContextProvider({ children }) {
   //   const [location, setLocation] = useState([]);
-  const [city, setCity] = useState('');
+  const [cityName, setCityName] = useState('');
 
   const handleChange = useCallback(({ target }) => {
-    setCity(target.value);
+    setCityName(target.value);
   }, []);
 
   const value = useMemo(
     () => ({
-      city,
+      cityName,
       handleChange,
     }),
-    [city, handleChange],
+    [cityName, handleChange],
   );
 
   return (
