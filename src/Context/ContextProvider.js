@@ -1,10 +1,14 @@
 import PropTypes from 'prop-types';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import fetchDefaultCity from '../utils/fetchDefaultCity';
 import Context from './Context';
 
 function ContextProvider({ children }) {
-  //   const [location, setLocation] = useState([]);
   const [cityName, setCityName] = useState('');
+  const [temperature, setTemperture] = useState({});
+  const [meteorology, setMeteorology] = useState({});
+  const [cityInfos, setCityInfos] = useState({});
+  const [loading, setLoading] = useState(true);
 
   const handleChange = useCallback(({ target }) => {
     setCityName(target.value);
@@ -14,9 +18,22 @@ function ContextProvider({ children }) {
     () => ({
       cityName,
       handleChange,
+      temperature,
+      meteorology,
+      cityInfos,
+      loading,
     }),
-    [cityName, handleChange],
+    [cityName, handleChange, temperature, meteorology, cityInfos, loading],
   );
+
+  useEffect(() => {
+    fetchDefaultCity().then(({ main, weather, name, sys: { country } }) => {
+      setTemperture(main);
+      setMeteorology(weather[0]);
+      setCityInfos({ name, country });
+      setLoading(false);
+    });
+  });
 
   return (
     <Context.Provider value={ value }>
