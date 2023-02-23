@@ -8,15 +8,27 @@ function Main() {
     temperature,
     cityInfos,
     meteorology,
-    loading } = useContext(Context);
+    loading,
+    // coordinates,
+    getCordenates,
+  } = useContext(Context);
 
   if (loading) return <p>Loading...</p>;
 
   return (
     <>
       <div>
-        <input type="text" value={ cityName } onChange={ handleChange } />
-        <button type="button">Pesquisar</button>
+        <input
+          type="text"
+          value={ cityName }
+          onChange={ handleChange }
+          onKeyPress={ (e) => {
+            if (e.key === 'Enter') { getCordenates(); }
+          } }
+        />
+        <button type="button" onClick={ getCordenates }>
+          Pesquisar
+        </button>
       </div>
       <div>
         <h1>
@@ -34,7 +46,6 @@ function Main() {
         </h3>
       </div>
     </>
-
   );
 }
 
