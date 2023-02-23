@@ -9,7 +9,6 @@ function Main() {
     cityInfos,
     meteorology,
     loading,
-    // coordinates,
     getCordenates,
   } = useContext(Context);
 

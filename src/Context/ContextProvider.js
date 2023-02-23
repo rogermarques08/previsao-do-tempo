@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import fetchCity from '../utils/fetchCity';
 import fetchDefaultCity from '../utils/fetchDefaultCity';
 import fetchLatAndLong from '../utils/fetchLatAndLong';
 import Context from './Context';
@@ -10,16 +11,27 @@ function ContextProvider({ children }) {
   const [meteorology, setMeteorology] = useState({});
   const [cityInfos, setCityInfos] = useState({});
   const [loading, setLoading] = useState(true);
-  const [coordinates, setCoordinates] = useState({});
 
   const handleChange = useCallback(({ target }) => {
     setCityName(target.value);
   }, []);
 
+  const getCity = (lat, lon) => {
+    fetchCity(lat, lon).then(({ main, weather, name, sys: { country } }) => {
+      setTemperture(main);
+      setMeteorology(weather[0]);
+      setCityInfos({ name, country });
+      setLoading(false);
+    });
+  };
+
   const getCordenates = useCallback(async () => {
+    setLoading(true);
     fetchLatAndLong(cityName).then((data) => {
-      console.log(data);
-      setCoordinates(data[0]);
+      const lat = data[0].lat.toFixed(2);
+      const lon = data[0].lon.toFixed(2);
+
+      getCity(lat, lon);
     });
   }, [cityName]);
 
@@ -32,7 +44,6 @@ function ContextProvider({ children }) {
       cityInfos,
       loading,
       getCordenates,
-      coordinates,
     }),
     [
       cityName,
@@ -41,13 +52,13 @@ function ContextProvider({ children }) {
       meteorology,
       cityInfos,
       loading,
-      coordinates,
       getCordenates,
     ],
   );
 
   useEffect(() => {
     fetchDefaultCity().then(({ main, weather, name, sys: { country } }) => {
+      setLoading(true);
       setTemperture(main);
       setMeteorology(weather[0]);
       setCityInfos({ name, country });
