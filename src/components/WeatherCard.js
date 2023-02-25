@@ -6,6 +6,7 @@ function WeatherCard() {
     temperature,
     cityInfos,
     meteorology,
+    scale,
   } = useContext(Context);
 
   return (
@@ -20,7 +21,7 @@ function WeatherCard() {
       <h2>
         {temperature.temp}
         {' '}
-        ºC
+        {scale === 'metric' ? '°C' : '°F'}
       </h2>
       <h3>
         Feels like

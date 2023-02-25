@@ -11,6 +11,7 @@ function ContextProvider({ children }) {
   const [meteorology, setMeteorology] = useState({});
   const [cityInfos, setCityInfos] = useState({});
   const [loading, setLoading] = useState(true);
+  const [scale, setScale] = useState('metric');
 
   const handleChange = useCallback(({ target }) => {
     setCityName(target.value);
@@ -18,7 +19,7 @@ function ContextProvider({ children }) {
 
   const getCity = (lat, lon) => {
     fetchCity(lat, lon).then(({ main, weather, name, sys: { country } }) => {
-      setTemperture(main);
+      setTemperture({ temp: main.temp, feels_like: main.feels_like });
       setMeteorology(weather[0]);
       setCityInfos({ name, country });
       setLoading(false);
@@ -44,6 +45,9 @@ function ContextProvider({ children }) {
       cityInfos,
       loading,
       getCordenates,
+      setTemperture,
+      setScale,
+      scale,
     }),
     [
       cityName,
@@ -53,13 +57,14 @@ function ContextProvider({ children }) {
       cityInfos,
       loading,
       getCordenates,
+      scale,
     ],
   );
 
   useEffect(() => {
     fetchDefaultCity().then(({ main, weather, name, sys: { country } }) => {
       setLoading(true);
-      setTemperture(main);
+      setTemperture({ temp: main.temp, feels_like: main.feels_like });
       setMeteorology(weather[0]);
       setCityInfos({ name, country });
       setLoading(false);

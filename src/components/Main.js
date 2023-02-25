@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Context from '../Context/Context';
+import ConverterButtons from './ConverterButtons';
 import WeatherCard from './WeatherCard';
 
 function Main() {
@@ -14,18 +15,21 @@ function Main() {
 
   return (
     <main>
-      <input
-        type="text"
-        value={ cityName }
-        onChange={ handleChange }
-        onKeyPress={ (e) => {
-          if (e.key === 'Enter') { getCordenates(); }
-        } }
-      />
-      <button type="button" onClick={ getCordenates }>
-        Pesquisar
-      </button>
+      <div>
+        <input
+          type="text"
+          value={ cityName }
+          onChange={ handleChange }
+          onKeyPress={ (e) => {
+            if (e.key === 'Enter') { getCordenates(); }
+          } }
+        />
+        <button type="button" onClick={ getCordenates }>
+          Pesquisar
+        </button>
+      </div>
       <WeatherCard />
+      <ConverterButtons />
     </main>
   );
 }
