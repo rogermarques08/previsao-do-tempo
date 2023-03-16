@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Context from '../Context/Context';
+import mapIcons from '../utils/mapIcons';
 
 function WeatherCard() {
   const {
@@ -17,6 +18,11 @@ function WeatherCard() {
         {' '}
         {cityInfos.country}
       </h1>
+      <img
+        src={ mapIcons(meteorology.description) }
+        alt={ `${meteorology.description}icon` }
+        style={ { width: '200px' } }
+      />
       <h2>{meteorology.description}</h2>
       <h2>
         {temperature.temp}
