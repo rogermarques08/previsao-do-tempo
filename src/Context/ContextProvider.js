@@ -9,6 +9,7 @@ function ContextProvider({ children }) {
   const [cityName, setCityName] = useState('');
   const [temperature, setTemperture] = useState({});
   const [meteorology, setMeteorology] = useState({});
+  const [extrasInfos, setExtrasInfos] = useState({});
   const [cityInfos, setCityInfos] = useState({});
   const [loading, setLoading] = useState(true);
   const [scale, setScale] = useState('metric');
@@ -18,12 +19,19 @@ function ContextProvider({ children }) {
   }, []);
 
   const getCity = (lat, lon) => {
-    fetchCity(lat, lon).then(({ main, weather, name, sys: { country } }) => {
-      setTemperture({ temp: main.temp, feels_like: main.feels_like });
-      setMeteorology(weather[0]);
-      setCityInfos({ name, country });
-      setLoading(false);
-    });
+    fetchCity(lat, lon)
+      .then(({ main, weather, wind, name, sys: { country, sunrise, sunset } }) => {
+        setTemperture({ temp: main.temp, feels_like: main.feels_like });
+        setMeteorology(weather[0]);
+        setExtrasInfos({
+          humidity: main.humidity,
+          windSpeed: wind.speed,
+          sunrise,
+          sunset,
+        });
+        setCityInfos({ name, country });
+        setLoading(false);
+      });
   };
 
   const getCordenates = useCallback(async () => {
@@ -48,6 +56,7 @@ function ContextProvider({ children }) {
       setTemperture,
       setScale,
       scale,
+      extrasInfos,
     }),
     [
       cityName,
@@ -58,17 +67,25 @@ function ContextProvider({ children }) {
       loading,
       getCordenates,
       scale,
+      extrasInfos,
     ],
   );
 
   useEffect(() => {
-    fetchDefaultCity().then(({ main, weather, name, sys: { country } }) => {
-      setLoading(true);
-      setTemperture({ temp: main.temp, feels_like: main.feels_like });
-      setMeteorology(weather[0]);
-      setCityInfos({ name, country });
-      setLoading(false);
-    });
+    fetchDefaultCity()
+      .then(({ main, weather, wind, name, sys: { country, sunrise, sunset } }) => {
+        setLoading(true);
+        setTemperture({ temp: main.temp, feels_like: main.feels_like });
+        setMeteorology(weather[0]);
+        setExtrasInfos({
+          humidity: main.humidity,
+          windSpeed: wind.speed,
+          sunrise,
+          sunset,
+        });
+        setCityInfos({ name, country });
+        setLoading(false);
+      });
   }, []);
 
   return <Context.Provider value={ value }>{children}</Context.Provider>;
