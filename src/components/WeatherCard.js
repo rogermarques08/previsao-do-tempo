@@ -19,8 +19,8 @@ function WeatherCard() {
         {cityInfos.country}
       </h1>
       <img
-        src={ mapIcons(meteorology.description) }
-        alt={ `${meteorology.description}icon` }
+        src={ mapIcons(meteorology.main) }
+        alt={ `${meteorology.main}icon` }
         style={ { width: '200px' } }
       />
       <h2>{meteorology.description}</h2>
