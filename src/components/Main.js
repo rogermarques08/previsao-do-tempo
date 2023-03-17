@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import Context from '../Context/Context';
 import ConverterButtons from './ConverterButtons';
+import ExtraInfos from './ExtraInfos';
 import WeatherCard from './WeatherCard';
 
 function Main() {
@@ -29,6 +30,7 @@ function Main() {
         </button>
       </div>
       <WeatherCard />
+      <ExtraInfos />
       <ConverterButtons />
     </main>
   );
