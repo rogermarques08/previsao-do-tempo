@@ -36,9 +36,10 @@ function ContextProvider({ children }) {
 
   const getCordenates = useCallback(async () => {
     setLoading(true);
-    fetchLatAndLong(cityName).then((data) => {
-      const lat = data[0].lat.toFixed(2);
-      const lon = data[0].lon.toFixed(2);
+    fetchLatAndLong(cityName).then(([data]) => {
+      console.log(data);
+      const lat = data.lat.toFixed(2);
+      const lon = data.lon.toFixed(2);
 
       getCity(lat, lon);
     });
