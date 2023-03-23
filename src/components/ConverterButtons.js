@@ -1,6 +1,7 @@
 /* eslint-disable no-magic-numbers */
 import { useContext, useState } from 'react';
 import Context from '../Context/Context';
+import '../styles/ConverterButtons.css';
 
 function ConverterButtons() {
   const {
@@ -35,12 +36,13 @@ function ConverterButtons() {
   };
 
   return (
-    <div>
+    <div className="buttons-container">
       <button
         type="button"
         value="c"
         disabled={ cButtonDisabled }
         onClick={ convertTemperature }
+        className="temp-button"
       >
         Celsius
       </button>
@@ -49,6 +51,7 @@ function ConverterButtons() {
         value="f"
         disabled={ fButtonDisabled }
         onClick={ convertTemperature }
+        className="temp-button"
       >
         Fahrenheit
       </button>

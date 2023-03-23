@@ -1,0 +1,20 @@
+.buttons-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+    width: 180px;
+}
+
+.temp-button {
+    padding: 5px;
+    border: 2px solid black;
+    border-radius: 10px;
+    font-weight: 900;
+    background-color: whitesmoke;
+    font-size: 15px;
+}
+
+.temp-button:disabled {
+    transition-duration: 1s;
+    color: #0C90DB
+}
