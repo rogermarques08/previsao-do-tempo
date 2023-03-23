@@ -16,11 +16,11 @@ function Main() {
   return (
     <main className="main">
       <SearchBar />
+      <ConverterButtons />
       <div className="weather-container">
         <WeatherCard />
         <ExtraInfos />
       </div>
-      <ConverterButtons />
     </main>
   );
 }

@@ -3,10 +3,11 @@
     display: grid;
     gap: 20px;
     grid-template-columns: 1fr 1fr;
-    border: 1px solid black;
+    border: 3px solid black;
     border-radius: 15px;
     background-color: whitesmoke;
     padding: 10px;
+    margin-bottom: 20px;
 }
 
 .extra-infos-card {
