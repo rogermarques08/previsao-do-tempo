@@ -1,0 +1,21 @@
+.extra-infos-container {
+    margin-top: 20px;
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: whitesmoke;
+    padding: 10px;
+}
+
+.extra-infos-card {
+    width: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.extra-icons {
+    width: 90px;
+}

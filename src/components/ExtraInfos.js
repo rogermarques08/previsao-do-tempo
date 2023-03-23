@@ -1,5 +1,7 @@
 import { useContext } from 'react';
 import Context from '../Context/Context';
+import '../styles/ExtraInfos.css';
+import '../styles/WeatherCard.css';
 import convertTimestamp from '../utils/convertTimestamp';
 import mapIcons from '../utils/mapIcons';
 
@@ -9,38 +11,46 @@ function ExtraInfos() {
   } = useContext(Context);
 
   return (
-    <div>
-      <div>
+    <div className="extra-infos-container">
+      <div className="extra-infos-card">
+        <h3>Humidade :</h3>
         <img
           src={ mapIcons('humidity') }
           alt="humidity icon"
-          style={ { width: '200px' } }
+          className="extra-icons"
         />
         <h3>{`${extrasInfos.humidity}%`}</h3>
       </div>
-      <div>
+      <div className="extra-infos-card">
+        <h3>Vento :</h3>
         <img
           src={ mapIcons('wind') }
           alt="wind icon"
-          style={ { width: '200px' } }
+          className="extra-icons"
         />
         <h3>{`${extrasInfos.windSpeed}ms`}</h3>
       </div>
-      <div>
+      <div className="extra-infos-card">
+        <h3>Nascer do Sol : </h3>
         <img
           src={ mapIcons('sunrise') }
           alt="sunrise icon"
-          style={ { width: '200px' } }
+          className="extra-icons"
         />
-        <h3>{convertTimestamp(extrasInfos.sunrise)}</h3>
+        <h3>
+          {`${convertTimestamp(extrasInfos.sunrise).split(',')[1]} (GMT-3)`}
+        </h3>
       </div>
-      <div>
+      <div className="extra-infos-card">
+        <h3>Pôr do Sol :</h3>
         <img
           src={ mapIcons('sunset') }
           alt="sunset icon"
-          style={ { width: '200px' } }
+          className="extra-icons"
         />
-        <h3>{convertTimestamp(extrasInfos.sunset)}</h3>
+        <h3>
+          {` ${convertTimestamp(extrasInfos.sunset).split(',')[1]} (GMT-3)`}
+        </h3>
       </div>
     </div>
   );
