@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import Context from '../Context/Context';
+import '../styles/WeatherCard.css';
 import mapIcons from '../utils/mapIcons';
 
 function WeatherCard() {
@@ -11,7 +12,7 @@ function WeatherCard() {
   } = useContext(Context);
 
   return (
-    <div>
+    <div className="wheater-card-container">
       <h1>
         {cityInfos.name}
         ,
@@ -21,19 +22,29 @@ function WeatherCard() {
       <img
         src={ mapIcons(meteorology.main) }
         alt={ `${meteorology.main}icon` }
-        style={ { width: '200px' } }
+        className="icon"
       />
-      <h2>{meteorology.description}</h2>
+      <div className="description-container">
+        <h2>
+          {
+            meteorology.description[0].toUpperCase()
+        + meteorology.description.substring(1)
+          }
+
+        </h2>
+        <h2>
+          {Math.floor(temperature.temp)}
+          {' '}
+          {scale === 'metric' ? '°C' : '°F'}
+        </h2>
+      </div>
       <h2>
-        {temperature.temp}
+        Sensação Térmica:
+        {' '}
+        {Math.floor(temperature.feels_like)}
         {' '}
         {scale === 'metric' ? '°C' : '°F'}
       </h2>
-      <h3>
-        Feels like
-        {' '}
-        {temperature.feels_like}
-      </h3>
     </div>
   );
 }
