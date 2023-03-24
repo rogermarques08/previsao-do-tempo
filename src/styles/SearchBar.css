@@ -20,6 +20,11 @@ input {
     padding: 5px;
 }
 
+input:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
 .search-icon {
     width: 20px;
 }
