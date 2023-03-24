@@ -4,7 +4,6 @@ const fetchCity = async (lat, lon) => {
   const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&lang=pt_br&appid=${key}`;
   const response = await fetch(url);
   const data = await response.json();
-  console.log(data);
 
   return data;
 };

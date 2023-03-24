@@ -13,6 +13,7 @@ function ContextProvider({ children }) {
   const [cityInfos, setCityInfos] = useState({});
   const [loading, setLoading] = useState(true);
   const [scale, setScale] = useState('metric');
+  const [error, setError] = useState(false);
 
   const handleChange = useCallback(({ target }) => {
     setCityName(target.value);
@@ -21,27 +22,37 @@ function ContextProvider({ children }) {
   const getCity = (lat, lon) => {
     fetchCity(lat, lon)
       .then(({ main, weather, wind, name, sys: { country, sunrise, sunset } }) => {
-        setTemperture({ temp: main.temp, feels_like: main.feels_like });
-        setMeteorology(weather[0]);
-        setExtrasInfos({
-          humidity: main.humidity,
-          windSpeed: wind.speed,
-          sunrise,
-          sunset,
-        });
-        setCityInfos({ name, country });
-        setLoading(false);
+        try {
+          setTemperture({ temp: main.temp, feels_like: main.feels_like });
+          setMeteorology(weather[0]);
+          setExtrasInfos({
+            humidity: main.humidity,
+            windSpeed: wind.speed,
+            sunrise,
+            sunset,
+          });
+          setCityInfos({ name, country });
+          setLoading(false);
+        } catch (e) {
+          setLoading(false);
+          setError(true);
+        }
       });
   };
 
   const getCordenates = useCallback(async () => {
     setLoading(true);
     fetchLatAndLong(cityName).then(([data]) => {
-      console.log(data);
-      const lat = data.lat.toFixed(2);
-      const lon = data.lon.toFixed(2);
+      try {
+        const lat = data.lat.toFixed(2);
+        const lon = data.lon.toFixed(2);
 
-      getCity(lat, lon);
+        getCity(lat, lon);
+        setError(false);
+      } catch (e) {
+        setLoading(false);
+        setError(true);
+      }
     });
   }, [cityName]);
 
@@ -58,6 +69,7 @@ function ContextProvider({ children }) {
       setScale,
       scale,
       extrasInfos,
+      error,
     }),
     [
       cityName,
@@ -69,6 +81,7 @@ function ContextProvider({ children }) {
       getCordenates,
       scale,
       extrasInfos,
+      error,
     ],
   );
 

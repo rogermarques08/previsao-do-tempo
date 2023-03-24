@@ -4,13 +4,17 @@ import '../styles/Loading.css';
 import '../styles/MainStyle.css';
 import ConverterButtons from './ConverterButtons';
 import ExtraInfos from './ExtraInfos';
+import NotFound from './NotFound';
 import SearchBar from './SearchBar';
 import WeatherCard from './WeatherCard';
 
 function Main() {
   const {
     loading,
+    error,
   } = useContext(Context);
+
+  if (error) return (<NotFound />);
 
   if (loading) {
     return (
