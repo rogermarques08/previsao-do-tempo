@@ -17,12 +17,13 @@ function SearchBar() {
         placeholder="Pesquisar"
         onChange={ handleChange }
         onKeyPress={ (e) => {
-          if (e.key === 'Enter') { getCordenates(); }
+          if (e.key === 'Enter' && cityName.length > 0) { getCordenates(); }
         } }
       />
       <button
         type="button"
         onClick={ getCordenates }
+        disabled={ !cityName.length > 0 }
       >
         <img src={ SearchIcon } alt="search icon" className="search-icon" />
         {/* <a href="https://www.flaticon.com/free-icons/search" title="search icons">Search icons created by Royyan Wijaya - Flaticon</a> */}
