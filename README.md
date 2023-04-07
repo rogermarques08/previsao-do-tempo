@@ -12,7 +12,7 @@
 ## :desktop_computer:  Tecnologias
 Para o desenvolvimento utilizei as seguintes tecnologias: 
 - **API** Open Wheater
-- **ReactJs** como bibilhoteca.
+- **ReactJs** como biblioteca.
 - **JavaScript** como linguagem;
 - **CSS** para a estilização
 
@@ -32,7 +32,7 @@ npm start
 
 <div align='center'>
  Desenvolvido por
-  <a href="https://weather-app-eta-ashy.vercel.app/">Roger Marques<a/>
+  <a href="https://github.com/rogermarques08">Roger Marques<a/>
  
 </div>
  
