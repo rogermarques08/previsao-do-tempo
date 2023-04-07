@@ -1,7 +1,7 @@
 <div align='center'>
   <h1>Previsão do tempo</h1>
   <img src="https://i.ibb.co/RSZPyYq/Captura-de-tela-de-2023-04-04-10-41-35.png"/>
-  <p>Esta é uma aplicação com suporte para mobile e desktop bem simples de , onde é possível pesquisar e verificar a previsão do tempo de sua cidade, além de algumas informações extras como umidade do ar, velocidade do vento e horário do nascer e pôr do sol. </p>
+  <p>Esta é uma aplicação com suporte para mobile e desktop bem simples de usar, onde é possível pesquisar e verificar a previsão do tempo de sua cidade, além de algumas informações extras como umidade do ar, velocidade do vento e horário do nascer e pôr do sol. </p>
 	     
 </div>
 <hr />
